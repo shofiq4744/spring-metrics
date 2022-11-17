@@ -1,0 +1,40 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.5.2'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.shofiq'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "2020.0.3")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'io.micrometer', name: 'micrometer-core', version: '1.5.5'
+	implementation group: 'io.micrometer', name: 'micrometer-registry-prometheus', version: '1.9.0'
+	implementation 'io.micrometer:micrometer-registry-jmx'
+	//Test
+	testImplementation 'io.projectreactor:reactor-test'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+		mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
