@@ -1,0 +1,8 @@
+---
+# The HostName of JMX instance and JMX Port to expose for the JMX exporter.
+#hostPort: "localhost:5000"
+startDelaySeconds: 0
+rules:
+  - pattern: ".*"
+ 
+
